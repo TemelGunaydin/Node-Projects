@@ -1,11 +1,10 @@
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+require("dotenv").config({ path: `../.env.${process.env.NODE_ENV}` });
 
-mongoose.connect(
-  "mongodb+srv://test:test@cluster0.gm3tc3v.mongodb.net/?retryWrites=true&w=majority"
-);
-
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
+console.log(process.env.MONGODB_CONNECTION_STRING);
 //blueprint for objects that mongoDB expects
 const todoSchema = new mongoose.Schema({
   item: String,
